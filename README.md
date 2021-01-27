@@ -1,6 +1,6 @@
 # Warning for rncryptor
 
-As **rncryptor** is going to interpret the content as UTF-8 modify **line 124** in **rncryptor.py** with the following:
+As **rncryptor** is going to interpret the content as UTF-8, modify **line 124** in **rncryptor.py** with the following:
 
     return decrypted_data
 Instead of:
