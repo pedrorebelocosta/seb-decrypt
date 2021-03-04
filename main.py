@@ -1,8 +1,8 @@
 import zlib
 import rncryptor
 
-FILENAME = "SebClientSettings-RC.seb"
-PASSWORD = "setnow"
+FILENAME = "SebClientSettings.seb"
+PASSWORD = "banana"
 
 compressedFile = open(FILENAME, 'rb').read()
 _bytes = zlib.decompress(compressedFile, zlib.MAX_WBITS | 16)
