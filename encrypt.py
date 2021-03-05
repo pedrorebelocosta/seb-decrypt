@@ -1,29 +1,26 @@
 import zlib
 import rncryptor
+import gzip
 
-FILENAME = "file-in.seb"
+FILENAME = "SebCfgFile"
 PASSWORD = "banana"
 
-file = open('seb-settings.xml', 'rb')
-byteStr = file.read()
+xmlFile = open('seb-settings.xml', 'r')
+rawXML = xmlFile.read()
 
 prefix = bytes('pswd', encoding='latin1')
-compressedXML = zlib.compress(byteStr, 9)
+parsedXml = bytes(rawXML, encoding='utf-8')
+
+compressedXML = zlib.compress(parsedXml)
 encryptedXML = rncryptor.encrypt(compressedXML, PASSWORD)
 
-with open('lol'+FILENAME, 'wb+') as f:
-    f.write(prefix)
-    f.seek(5, 0)
-    f.write(bytes(encryptedXML))
+file = open(FILENAME, 'wb')
+file.write(prefix)
+file.seek(4, 0)
+file.write(bytes(encryptedXML))
 
-file2 = open('lol'+FILENAME, 'rb')
+file2 = open(FILENAME, 'rb')
 data = file2.read()
 
-print(data)
-print('writing another file')
-file3 = open('test.seb', 'wb')
-compressedData = zlib.compress(data, 0)
-file3.write(compressedData)
-
-filer = open('test.seb', 'rb')
-print(filer.read())
+# Last step would be to create a .seb file
+# Which is nothing more than a gzip archive without the file headers
